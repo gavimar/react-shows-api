@@ -6,6 +6,7 @@ import {fetchShows}  from '../services/ReasonService';
 import Loader from './Loader';
 import { Switch,Route } from 'react-router-dom';
 import ShowDetail from './ShowDetail'
+import Input from './Input'
 
 class App extends React.Component {
   _isMounted = false;
@@ -15,6 +16,7 @@ class App extends React.Component {
       this.state = {
         data:[],
         loading: true,
+        input:'',
         showInfo:{
           id:''
 
@@ -24,6 +26,8 @@ class App extends React.Component {
       this.fetchNewShows = this.fetchNewShows.bind(this);
       this.renderShowDetail = this.renderShowDetail.bind(this);
       this.handleShowInfo = this.handleShowInfo.bind(this);
+      this.handleInputValue = this.handleInputValue.bind(this);
+      this.fetchInputShows = this.fetchInputShows.bind(this);
      
   }
 
@@ -35,8 +39,23 @@ class App extends React.Component {
   
 
   
+    fetchInputShows() {
+      const ENDPOINT = `http://api.tvmaze.com/search/shows?q=${this.state.input}`;
+
+        fetch(ENDPOINT)
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+            data: data
+          });
+        });
+    }
+
+    
     fetchNewShows() {
+      
       fetchShows()
+        
         .then(data => {
           this.setState({
             data: data
@@ -54,6 +73,7 @@ componentDidMount(){
 
 componentDidUpdate(){
   console.log(this.state)
+  
 }
 
 renderShowDetail(){
@@ -62,9 +82,17 @@ renderShowDetail(){
   const shows = this.state.data;
   for(let showObj of shows) {
     if(showObj.show.id === parseInt(urlId)) {
+      console.log(showObj)
+      console.log(urlId)
       return <ShowDetail show={showObj}/>
     }
   }
+}
+
+handleInputValue = (target) =>{
+  this.setState((prevState) =>{
+      return(prevState.input = target)
+  })
 }
 
 
@@ -76,6 +104,14 @@ render() {
     <Switch>
     <Route exact path="/">
       <h1>Shows finder</h1>
+      <Input type="text"
+                     name="name"
+                     id="user-name"
+                     labelName="Show"
+                     
+                     handleInputValue={this.handleInputValue}
+                     fetchInputShows = {this.fetchInputShows}
+              />
       {this.state.loading ? (
           <Loader />
         ) : (

@@ -13,19 +13,20 @@ const ShowList = (props) => {
         return (
             
             <ul>
-            {props.data.map((showItem) =>
-                // <Link to={`/Show/${showItem.show.id}`}>
+            {props.data.map((showItem, index) =>
+                <Link to={`/Show/${showItem.show.id}`}>
                 <Show
-                key = {showItem.show.id}
+                key = {index}
                 title = {showItem.show.name}
                 photo = {showItem.show.image.medium}
                 rating = {showItem.show.rating.average}
                 status ={showItem.show.status}
                 handleShowInfo = {props.handleShowInfo}
                 id = {showItem.show.id}
+               
                 
                 /> 
-                // </Link>
+                </Link>
                 )}
                 </ul>
                 );
