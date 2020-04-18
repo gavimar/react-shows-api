@@ -4,9 +4,9 @@ import React from 'react';
 const User = (props) => {
     const handleShowInfo = (event) =>{
         
-        let target = event.target
+        let target = event.currentTarget
         props.handleShowInfo(target)
-    console.log(event.target)
+    console.log(event.currentTarget)
     }
     
     return (

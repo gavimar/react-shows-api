@@ -45,11 +45,15 @@ class App extends React.Component {
     }
 
 
-componentDidMount(props){
+componentDidMount(){
   this._isMounted = true;
   this.fetchNewShows();
   console.log(this.state)
   
+}
+
+componentDidUpdate(){
+  console.log(this.state)
 }
 
 renderShowDetail(){
@@ -81,7 +85,7 @@ render() {
         )}
        
     </Route>
-    {/* <Route path="/Show/:id" render={this.renderShowDetail}/> */}
+    <Route path="/Show/:id" render={this.renderShowDetail}/>
     </Switch>
     </div> 
   );
