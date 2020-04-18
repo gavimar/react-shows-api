@@ -1,0 +1,43 @@
+.wrapper {
+  text-align: center;
+  
+}
+
+
+ul{
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  li{
+    display: inline-block;
+    margin: 10px;
+    border-radius: 5px;
+    border: solid 1px black;
+    background-color: #d4fbff;
+    width: 160px;
+
+    .details{
+      border-top: solid 1px black;
+    }
+   
+    
+
+    h2{
+      
+      margin:0px;
+      padding:2px;
+      text-transform: capitalize;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    img{
+      width: 96px;
+      height: 96px;
+    }
+
+    
+  }
+}
+
