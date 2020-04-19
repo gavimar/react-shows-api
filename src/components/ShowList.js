@@ -14,7 +14,7 @@ const ShowList = (props) => {
             
             <ul>
                 {data
-          .filter(showItem => !checked || (checked && showItem.show.status !== "Ended"))
+          .filter(showItem => !checked || (checked && showItem.show.status === "Running"))
             .map((showItem) =>
                 <Link to={`/Show/${showItem.show.id}`}>
                 <Show
