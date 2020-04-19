@@ -7,6 +7,7 @@ import Loader from './Loader';
 import { Switch,Route } from 'react-router-dom';
 import ShowDetail from './ShowDetail'
 import Input from './Input'
+import InputRadio from './InputRadio'
 
 class App extends React.Component {
   _isMounted = false;
@@ -20,7 +21,8 @@ class App extends React.Component {
         showInfo:{
           id:''
 
-        }
+        },
+        checked : false
       }
       setTimeout(() => this.setState({loading: false}), 2000);
       this.fetchNewShows = this.fetchNewShows.bind(this);
@@ -28,6 +30,7 @@ class App extends React.Component {
       this.handleShowInfo = this.handleShowInfo.bind(this);
       this.handleInputValue = this.handleInputValue.bind(this);
       this.fetchInputShows = this.fetchInputShows.bind(this);
+      this.handleRadioButton = this.handleRadioButton.bind(this);
      
   }
 
@@ -38,7 +41,17 @@ class App extends React.Component {
   }
   
 
-  
+  // fetchInputShows() {
+  //     const ENDPOINT = `http://api.tvmaze.com/shows`;
+
+  //       fetch(ENDPOINT)
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         this.setState({
+  //           data: data
+  //         });
+  //       });
+  //   }
     fetchInputShows() {
       const ENDPOINT = `http://api.tvmaze.com/search/shows?q=${this.state.input}`;
 
@@ -106,6 +119,13 @@ handleInputValue = (target) =>{
   })
 }
 
+handleRadioButton = () =>{
+  this.setState((prevState) =>{
+    return(prevState.checked = !prevState.checked)
+})
+
+}
+
 
 render() {
   const {data} = this.state;
@@ -117,11 +137,20 @@ render() {
       <h1>Shows finder</h1>
       <Input type="text"
                      name="name"
-                     id="user-name"
-                     labelName="Show"
+                     checked = ""
                      
                      handleInputValue={this.handleInputValue}
                      fetchInputShows = {this.fetchInputShows}
+              />
+               
+              <InputRadio type="radio"
+                     name="running"
+                     id="running"
+                     checked = {this.state.checked}
+                     handleRadioButton = {this.handleRadioButton}
+                     handleInputValue={this.handleInputValue}
+                     fetchInputShows = {this.fetchInputShows}
+                     labelName="Running shows"
               />
       {this.state.loading ? (
           <Loader />

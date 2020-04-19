@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = (props) => {
+const InputRadio = (props) => {
 
   const handleInputValue = (event) => {
     let target = event.currentTarget.value;
@@ -14,18 +14,17 @@ const Input = (props) => {
 
   return (
     <div className="input-wrapper">
-      
+      <label htmlFor={props.id}>{props.labelName}</label>
       <input name={props.name}
              type={props.type}
-             
-             onChange = {handleInputValue}
+             checked = {props.checked}
+             onClick = {props.handleRadioButton}
              
              
       />
-      <button type="button" className="button" onClick={handleInputFetch}>Submit</button>
      
     </div>
   )
 }
 
-export default Input;
+export default InputRadio;
