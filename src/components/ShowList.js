@@ -7,13 +7,15 @@ import { Link } from 'react-router-dom';
 
 const ShowList = (props) => {
 
-    
+    const {data,checked} = props
     
        
         return (
             
             <ul>
-            {props.data.map((showItem) =>
+                {data
+          .filter(showItem => !checked || (checked && showItem.show.status !== "Ended"))
+            .map((showItem) =>
                 <Link to={`/Show/${showItem.show.id}`}>
                 <Show
                 key = {showItem.show.id}

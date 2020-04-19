@@ -126,9 +126,21 @@ handleRadioButton = () =>{
 
 }
 
+// paintRunningShows = () =>{
+//   const shows = this.state.data;
+//   if (this.state.checked === true){
+//     for (showObj of shows){
+//       if (showObj.show.status === "Ended"){
+
+//       }
+//     }
+
+//   }
+// }
+
 
 render() {
-  const {data} = this.state;
+  const {data,checked} = this.state;
   console.log(data)
   return (
     <div className="wrapper">
@@ -155,7 +167,7 @@ render() {
       {this.state.loading ? (
           <Loader />
         ) : (
-    <ShowList
+    <ShowList checked={checked} 
     data = {data}
     handleShowInfo= {this.handleShowInfo}/>
         )}
