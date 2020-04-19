@@ -76,18 +76,29 @@ componentDidUpdate(){
   
 }
 
-renderShowDetail(){
-
-  const urlId = this.state.showInfo.id;
+renderShowDetail(props){
+  console.log(props)
+  const urlId = props.match.params.id;
   const shows = this.state.data;
   for(let showObj of shows) {
     if(showObj.show.id === parseInt(urlId)) {
-      console.log(showObj)
-      console.log(urlId)
       return <ShowDetail show={showObj}/>
     }
   }
 }
+
+// renderShowDetail(){
+
+//   const urlId = this.state.showInfo.id;
+//   const shows = this.state.data;
+//   for(let showObj of shows) {
+//     if(showObj.show.id === parseInt(urlId)) {
+//       console.log(showObj)
+//       console.log(urlId)
+//       return <ShowDetail show={showObj}/>
+//     }
+//   }
+// }
 
 handleInputValue = (target) =>{
   this.setState((prevState) =>{
